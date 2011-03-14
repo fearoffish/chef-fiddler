@@ -1,8 +1,8 @@
 module ChefFiddler
   class Control
-    def self.get_clusters
-      search = ChefFiddler::Search.new
-      results = search.get_clusters
+    def self.get_clusters(options={})
+      search = ChefFiddler::Search.new(options)
+      results = search.get_clusters("", options)
 
       results
     end

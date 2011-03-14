@@ -10,12 +10,12 @@ module ChefFiddler
       @nodes = []
     end
 
-    def self.clusters_from_nodes(nodes)
+    def self.clusters_from_nodes(nodes, options={})
       clusters = []
       unique_cluster_envs = get_unique_cluster_names(nodes)
       unique_cluster_envs.each do |name|
         cluster_nodes = nodes.find_all do |node|
-          App.cluster_identification( node, name )
+          options[:cluster_identification].call( node, name )
         end.sort_by {|node| node.name }
 
         cluster = Cloud::Cluster.new(:name => name)
