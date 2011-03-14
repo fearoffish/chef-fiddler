@@ -4,7 +4,7 @@ require 'chef/data_bag_item'
 module ChefFiddler
   class Search < ::Chef::Knife
     def initialize(options={})
-      super
+      super()
       @options = options
       late_load_deps
       config[:config_file] ||= options[:knife_config_file]
