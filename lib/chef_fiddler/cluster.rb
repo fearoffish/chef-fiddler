@@ -15,7 +15,7 @@ module ChefFiddler
       unique_cluster_envs = get_unique_cluster_names(nodes)
       unique_cluster_envs.each do |name|
         cluster_nodes = nodes.find_all do |node|
-          options[:cluster_identification].call( node, name )
+          name == node[:cluster_environment]
         end.sort_by {|node| node.name }
 
         cluster = Cloud::Cluster.new(:name => name)
@@ -27,5 +27,10 @@ module ChefFiddler
       end
       clusters
     end
+    
+    private
+      def self.get_unique_cluster_names(nodes)
+        nodes.collect {|node| node[:cluster_environment] }.uniq
+      end
   end
 end
