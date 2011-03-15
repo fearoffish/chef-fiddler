@@ -18,10 +18,10 @@ module ChefFiddler
           name == node[:cluster_environment]
         end.sort_by {|node| node.name }
 
-        cluster = Cloud::Cluster.new(:name => name)
+        cluster = ChefFiddler::Cluster.new(:name => name)
 
         cluster_nodes.each do |data|
-          cluster.nodes << Cloud::Node.new(data)
+          cluster.nodes << ChefFiddler::Node.new(data)
         end
         clusters << cluster
       end
